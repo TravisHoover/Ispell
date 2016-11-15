@@ -1,3 +1,13 @@
+/*This program will emulate the Linux command ispell by creating an unordered_map from the 
+text file titled dict.txt, then performing operations on a word provided by the user. If the 
+word provided is an acceptable word, 'ok' will be displayed. Otherwise various functions will be
+run on the word to test for acceptance
+
+Author: Travis Hoover
+Class: CSCI 3110
+Professor: Dr. Dong
+Date: 11/15/2016*/
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -7,94 +17,50 @@
 
 using namespace std;
 
-const int TABLE_SIZE = 88984;
-
-class HashEntry {
-private:
-	int key;
-	int value;
-public:
-	HashEntry(int key, int value) {
-		this->key = key;
-		this->value = value;
-	}
-
-	int getKey() {
-		return key;
-	}
-
-	int getValue() {
-		return value;
-	}
-};
-
-class HashMap {
-private:
-	HashEntry **table;
-public:
-	HashMap() {
-		table = new HashEntry*[TABLE_SIZE];
-		for (int i = 0; i < TABLE_SIZE; i++)
-			table[i] = NULL;
-	}
-
-	int get(int key) {
-		int hash = (key % TABLE_SIZE);
-		while (table[hash] != NULL && table[hash]->getKey() != key)
-			hash = (hash + 1) % TABLE_SIZE;
-		if (table[hash] == NULL)
-			return -1;
-		else
-			return table[hash]->getValue();
-	}
-
-	void put(int key, int value) {
-		int hash = (key % TABLE_SIZE);
-		while (table[hash] != NULL && table[hash]->getKey() != key)
-			hash = (hash + 1) % TABLE_SIZE;
-		if (table[hash] != NULL)
-			delete table[hash];
-		table[hash] = new HashEntry(key, value);
-	}
-
-	~HashMap() {
-		for (int i = 0; i < TABLE_SIZE; i++)
-			if (table[i] != NULL)
-				delete table[i];
-		delete[] table;
-	}
-};
-
 int main()
 {
-	fstream myFile;
-	myFile.open("dict.txt");
-	string userInput;
+	unordered_map<string, int> dictionary;		//declare unordered_map named dictionary
+	const int TABLE_SIZE = 88984;
+	string entry = "";			//initialize entry to empty string
+	string userInput;			//string variable to handle user's input in interface
+	int counter = 0;				//counter for while loop to populate map
 
-	unordered_map<string, int> dictionary;
-	string entry = "";
-	int counter = 0;
+	fstream myFile;				//create file read variable
+	myFile.open("dict.txt");		//open file to read into unordered_map
 
-	while (myFile >> entry)
+	while (myFile >> entry)		//while there are entries in list, read list
 	{
 		dictionary[entry] = counter;
 		counter++;
 	}
 
-	//prompt the user to enter words. 
-	cout << "Please input a word: ";
-	cin >> userInput;
+	while (true)
+	{
+		//prompt the user to enter words. 
+		cout << "Please input a word: ";
+		cin >> userInput;
 
-	//For each word, check whether the word is in the dictionary. 
-	if (dictionary[userInput])
-		cout << "ok" << endl;		//if the word is in dictionary, print 'ok'
+		//For each word, check whether the word is in the dictionary. 
+		if (dictionary[userInput])
+		{
+			cout << "ok" << endl;		//if the word is in dictionary, print 'ok'
+		}
 
-	//If not, it should look for all possible near misses. 
+		else
+		{
+			//If not, it should look for all possible near misses and print them if found
+			WordChecker WordChecker(userInput);
 
-	//If the program finds any near misses in the dictionary, it should print them. 
+			WordChecker.hashDelete(userInput);
+			WordChecker.hashInsert(userInput);
+			WordChecker.hashSwap(userInput);
+			WordChecker.hashReplace(userInput);
+			WordChecker.hashSpace(userInput);
 
-	//If not, it should say "not found". 
-	else
-		cout << "not found" << endl;
+			//If no words are found after WordChecker, print "not found"
+			if (true)
+			cout << "not found" << endl;
+		}
+	}
 	return 0;
 }
