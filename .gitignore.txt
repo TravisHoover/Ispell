@@ -1,4 +1,0 @@
-x64*
-*.tlog
-OLA6*
-Debug*
