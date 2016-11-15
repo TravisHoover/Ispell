@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <unordered_map>
 #include <map>
 #include "WordChecker.h"
 
@@ -70,11 +71,14 @@ int main()
 	myFile.open("dict.txt");
 	string userInput;
 
-	while (!myFile.eof())
+	unordered_map<string, int> dictionary;
+	string entry = "";
+	int counter = 0;
+
+	while (myFile >> entry)
 	{
-		string entry ="";
-		myFile >> entry;
-		HashMap();
+		dictionary[entry] = counter;
+		counter++;
 	}
 
 	//prompt the user to enter words. 
@@ -82,20 +86,15 @@ int main()
 	cin >> userInput;
 
 	//For each word, check whether the word is in the dictionary. 
-	
-	//If so, it should say "ok". 
+	if (dictionary[userInput])
+		cout << "ok" << endl;		//if the word is in dictionary, print 'ok'
 
 	//If not, it should look for all possible near misses. 
 
 	//If the program finds any near misses in the dictionary, it should print them. 
 
 	//If not, it should say "not found". 
-
-
-
-
-
-
-
+	else
+		cout << "not found" << endl;
 	return 0;
 }
