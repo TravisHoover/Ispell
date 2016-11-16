@@ -57,7 +57,7 @@ int main()
 			Insert = WordChecker.hashInsert(userInput, dictionary);
 			Swap = WordChecker.hashSwap(userInput);
 			Replace = WordChecker.hashReplace(userInput, dictionary);
-			Space = WordChecker.hashSpace(userInput);
+			Space = WordChecker.hashSpace(userInput, dictionary);
 
 			//If no words are found after WordChecker, print "not found"
 			if (Delete || Insert || Swap || Replace || Space)

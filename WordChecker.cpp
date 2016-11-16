@@ -143,15 +143,36 @@ bool WordChecker::hashReplace(std::string entry, std::unordered_map<std::string,
 }
 
 /*Construct every pair of strings that can be made by inserting a space into the word. (n-1 pairs of words; you have to check separately in the dictionary for each word in the pair)*/
-bool WordChecker::hashSpace(std::string entry)
+bool WordChecker::hashSpace(std::string entry, std::unordered_map<std::string, int>& dictionary)
 {
-	for (int i = 0; i < entry.length(); i++)
+	std::vector<std::string> v; // vector to hold found words after replacement
+
+	for (int i = 1; i < entry.length(); i++) //for loop to cycle through each position of string
 	{
+		entry.insert(i, 1, ' ');		//make new words by inserting space
 
+		std::cout << "entry : " << entry << std::endl;
+
+		std::unordered_map<std::string, int>::const_iterator itr = dictionary.find(entry);	//check if new word is in the dictionary
+
+		if (!(itr == dictionary.end()))
+		{
+			v.push_back(entry);
+		}
+
+		//delete inserted letter
+		entry.erase(i, 1);
 	}
-	return false;
-}
 
-WordChecker::~WordChecker()
-{
+	//create set from vector, by default will only hold unique values(no duplicates)
+	std::set<std::string> s(v.begin(), v.end());
+
+	//print out set
+	for (std::set<std::string>::const_iterator j = s.begin(); j != s.end(); ++j)
+		std::cout << *j << std::endl;
+
+	if (s.empty())
+		return false;	//if set is empty return false
+	else
+		return true;
 }

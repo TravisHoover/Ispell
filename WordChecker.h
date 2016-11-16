@@ -20,8 +20,6 @@ public:
 	bool hashReplace(std::string, std::unordered_map<std::string, int>&);
 
 	//Construct every pair of strings that can be made by inserting a space into the word. (n-1 pairs of words; you have to check separately in the dictionary for each word in the pair)
-	bool hashSpace(std::string);
-
-	~WordChecker();
+	bool hashSpace(std::string, std::unordered_map<std::string, int>&);
 };
 
