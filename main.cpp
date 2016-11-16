@@ -54,13 +54,9 @@ int main()
 			WordChecker WordChecker(userInput);		//create WordChecker class to handle near misses
 
 			Delete = WordChecker.hashDelete(userInput, dictionary);
-
 			Insert = WordChecker.hashInsert(userInput, dictionary);
-			
 			Swap = WordChecker.hashSwap(userInput, dictionary);
-			
 			Replace = WordChecker.hashReplace(userInput, dictionary);
-			
 			Space = WordChecker.hashSpace(userInput, dictionary);
 
 			//If no words are found after WordChecker, print "not found"

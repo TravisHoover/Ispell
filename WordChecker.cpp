@@ -100,11 +100,12 @@ bool WordChecker::hashSwap(std::string entry, std::unordered_map<std::string, in
 		{
 			char temp = entry.at(i);			//store first letter to swap
 			char temp2 = entry.at(j);		//store second letter to swap
+			std::string temp3 = entry;
 			entry.at(i) = temp2;				//perform the swap at i
 			entry.at(j) = temp;				//perform the swap at j
 
 			std::unordered_map<std::string, int>::const_iterator itr = dictionary.find(entry);	//check if new word is in the dictionary
-			if (!(itr == dictionary.end()))
+			if (!(itr == dictionary.end()) && temp3 != entry)
 			{
 				v.push_back(entry);		//if it is in the dictionary, push back in vector
 			}
@@ -131,23 +132,24 @@ bool WordChecker::hashSwap(std::string entry, std::unordered_map<std::string, in
 /*Construct every string that can be made by replacing each letter in the word with some letter of the alphabet. (26*n possibilities (including the original word n times, which is probably easier than avoiding it))*/
 bool WordChecker::hashReplace(std::string entry, std::unordered_map<std::string, int>& dictionary)
 {
-	std::vector<std::string> v; // vector to hold found words after replacement
+	std::vector<std::string> r; // vector to hold found words after replacement
 
 	for (int i = 0; i < entry.length(); i++) //for loop to cycle through each position of string
 	{
 		for (int j = 97; j < 123; j++)		//for loop to insert each letter of alphabet. I will loop through the ASCII values for lower case alphabet
 		{
 			char temp = entry.at(i);		//store temp letter in word
-			char newChar = j;			//new letter to be inserted
+			std::string temp2 = entry;
+			char newChar = j;			//new letter to be inserted (converts j to ASCII char)
 
 			//make new word with replaced letter
 			entry.replace(i, 1, 1, newChar);
 
 			//check if new word is in the dictionary
 			std::unordered_map<std::string, int>::const_iterator itr = dictionary.find(entry);
-			if (!(itr == dictionary.end()))
+			if (!(itr == dictionary.end()) && entry != temp2)
 			{
-				v.push_back(entry);
+				r.push_back(entry);
 			}
 
 			//put i back after checking
@@ -156,11 +158,11 @@ bool WordChecker::hashReplace(std::string entry, std::unordered_map<std::string,
 	}
 
 		//create set from vector, by default will only hold unique values(no duplicates)
-		std::set<std::string> s(v.begin(), v.end());
+		std::set<std::string> s(r.begin(), r.end());
 
 		//print out set
-		for (std::set<std::string>::const_iterator j = s.begin(); j != s.end(); ++j)
-			std::cout << *j << std::endl;
+		for (std::set<std::string>::const_iterator itr = s.begin(); itr != s.end(); ++itr)
+			std::cout << *itr << std::endl;
 
 		if (s.empty())
 			return false;	//if set is empty return false
