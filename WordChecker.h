@@ -11,7 +11,7 @@ public:
 	bool hashDelete(std::string, std::unordered_map<std::string, int>&);
 
 	//Construct every string that can be made by inserting any letter of the alphabet at any position in the string. (26*(n+1) possibilities)
-	bool hashInsert(std::string);
+	bool hashInsert(std::string, std::unordered_map<std::string, int>&);
 
 	//Construct every string that can be made by swapping two neighboring characters in the string. (n-1 possibilities)
 	bool hashSwap(std::string);

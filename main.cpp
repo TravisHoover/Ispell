@@ -54,7 +54,7 @@ int main()
 			WordChecker WordChecker(userInput);
 
 			Delete = WordChecker.hashDelete(userInput, dictionary);
-			Insert = WordChecker.hashInsert(userInput);
+			Insert = WordChecker.hashInsert(userInput, dictionary);
 			Swap = WordChecker.hashSwap(userInput);
 			Replace = WordChecker.hashReplace(userInput, dictionary);
 			Space = WordChecker.hashSpace(userInput);
