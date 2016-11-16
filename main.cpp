@@ -36,6 +36,8 @@ int main()
 
 	while (true)
 	{
+		bool Delete, Insert, Swap, Replace, Space;
+
 		//prompt the user to enter words. 
 		cout << "Please input a word: ";
 		cin >> userInput;
@@ -51,15 +53,18 @@ int main()
 			//If not, it should look for all possible near misses and print them if found
 			WordChecker WordChecker(userInput);
 
-			WordChecker.hashDelete(userInput, dictionary, TABLE_SIZE);
-			WordChecker.hashInsert(userInput);
-			WordChecker.hashSwap(userInput);
-			WordChecker.hashReplace(userInput);
-			WordChecker.hashSpace(userInput);
+			Delete = WordChecker.hashDelete(userInput, dictionary, TABLE_SIZE);
+			Insert = WordChecker.hashInsert(userInput);
+			Swap = WordChecker.hashSwap(userInput);
+			Replace = WordChecker.hashReplace(userInput);
+			Space = WordChecker.hashSpace(userInput);
 
 			//If no words are found after WordChecker, print "not found"
-			if (true)
-			cout << "not found" << endl;
+			if (Delete || Insert || Swap || Replace || Space)
+				true;
+			else
+				cout << "not found" << endl;
+
 		}
 	}
 	return 0;

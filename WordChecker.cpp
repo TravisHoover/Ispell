@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <set>
 
 
 WordChecker::WordChecker(std::string entry)
@@ -12,6 +13,8 @@ WordChecker::WordChecker(std::string entry)
 /*Construct every string that can be made by deleting one letter from the word. (n possibilities, where n is the length of the word)*/
 bool WordChecker::hashDelete(std::string entry, std::unordered_map<std::string, int>& dictionary, int TABLE_SIZE)
 {
+	std::vector<std::string> v; // assume v has the elements
+
 	//for loop to delete letter and check against dictionary
 	for (int i = 0; i < entry.length(); i++)
 	{
@@ -21,14 +24,26 @@ bool WordChecker::hashDelete(std::string entry, std::unordered_map<std::string, 
 		//make new word with entry - [i]
 		entry.erase(i, 1);
 
-		//check if altered word is an acceptable word
-		
+		std::unordered_map<std::string, int>::const_iterator itr = dictionary.find(entry);
+		if (!(itr == dictionary.end()))
+		{
+			//std::cout << entry << std::endl;
+			v.push_back(entry);
+		}
 
 		//put i back after checking
 		entry.insert(i, 1, temp);
 	}
+	
+	std::set<std::string> s(v.begin(), v.end());
+	
+	for (std::set<std::string>::const_iterator j = s.begin(); j != s.end(); ++j)
+		std::cout << *j << std::endl;
 
-	return false;
+	if (s.empty())
+		return false;
+	else
+		return true;
 }
 
 /*Construct every string that can be made by inserting any letter of the alphabet at any position in the string. (26*(n+1) possibilities)*/
