@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <unordered_map>
 
 class WordChecker
 {
@@ -7,7 +8,7 @@ public:
 	WordChecker(std::string);
 
 	//Construct every string that can be made by deleting one letter from the word. (n possibilities, where n is the length of the word)
-	bool hashDelete(std::string);
+	bool hashDelete(std::string, std::unordered_map<std::string, int>&, int);
 
 	//Construct every string that can be made by inserting any letter of the alphabet at any position in the string. (26*(n+1) possibilities)
 	bool hashInsert(std::string);

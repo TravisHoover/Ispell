@@ -1,16 +1,16 @@
 #include "WordChecker.h"
 #include <iostream>
 #include <string>
+#include <unordered_map>
 
-using namespace std;
 
 WordChecker::WordChecker(std::string entry)
 {
-	string m_entry = entry;
+	std::string m_entry = entry;
 }
 
 /*Construct every string that can be made by deleting one letter from the word. (n possibilities, where n is the length of the word)*/
-bool WordChecker::hashDelete(std::string entry)
+bool WordChecker::hashDelete(std::string entry, std::unordered_map<std::string, int>& dictionary, int TABLE_SIZE)
 {
 	//for loop to delete letter and check against dictionary
 	for (int i = 0; i < entry.length(); i++)
@@ -27,6 +27,7 @@ bool WordChecker::hashDelete(std::string entry)
 		//put i back after checking
 		entry.insert(i, 1, temp);
 	}
+
 	return false;
 }
 
@@ -46,12 +47,12 @@ bool WordChecker::hashInsert(std::string entry)
 /*Construct every string that can be made by swapping two neighboring characters in the string. (n-1 possibilities)*/
 bool WordChecker::hashSwap(std::string entry)
 {
-	string temp = entry;
+	std::string temp = entry;
 	for (int i = 0; i < entry.length(); i++)
 	{
 		for (int j = 0; j < entry.length(); j++)
 		{
-			swap(entry[i], entry[j]);
+			std::swap(entry[i], entry[j]);
 
 			//check if newly created word is an acceptable one in the dictionary
 		}

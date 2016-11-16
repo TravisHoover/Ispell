@@ -51,7 +51,7 @@ int main()
 			//If not, it should look for all possible near misses and print them if found
 			WordChecker WordChecker(userInput);
 
-			WordChecker.hashDelete(userInput);
+			WordChecker.hashDelete(userInput, dictionary, TABLE_SIZE);
 			WordChecker.hashInsert(userInput);
 			WordChecker.hashSwap(userInput);
 			WordChecker.hashReplace(userInput);
