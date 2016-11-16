@@ -1,13 +1,16 @@
+/*This is the implementation file for the WordChecker class. It will handle
+all cases to test for near misses. It performs various functions on the user's
+input and checks to see if the results of those functions are words in the dictionary,
+returning them if they are*/
+
 #include "WordChecker.h"
 #include <iostream>
 #include <string>
 #include <unordered_map>
 #include <set>
 
-
-WordChecker::WordChecker(std::string entry)
+WordChecker::WordChecker(std::string)
 {
-	std::string m_entry = entry;
 }
 
 /*Construct every string that can be made by deleting one letter from the word. (n possibilities, where n is the length of the word)*/
@@ -51,7 +54,7 @@ bool WordChecker::hashDelete(std::string entry, std::unordered_map<std::string, 
 /*Construct every string that can be made by inserting any letter of the alphabet at any position in the string. (26*(n+1) possibilities)*/
 bool WordChecker::hashInsert(std::string entry, std::unordered_map<std::string, int>& dictionary)
 {
-	std::vector<std::string> v; // vector to hold found words after replacement
+	std::vector<std::string> v; // vector to hold found words after inserting letters
 
 	for (int i = 0; i < entry.length(); i++) //for loop to cycle through each position of string
 	{
@@ -89,7 +92,7 @@ bool WordChecker::hashInsert(std::string entry, std::unordered_map<std::string, 
 /*Construct every string that can be made by swapping two neighboring characters in the string. (n-1 possibilities)*/
 bool WordChecker::hashSwap(std::string entry, std::unordered_map<std::string, int>& dictionary)
 {
-	std::vector<std::string> v; // vector to hold found words after replacement
+	std::vector<std::string> v; // vector to hold found words after swapping
 
 	for (int i = 0; i < entry.length(); i++) //for loop to cycle through each position of string
 	{

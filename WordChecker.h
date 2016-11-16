@@ -1,3 +1,6 @@
+/*Header file for WordChecker class, which checks for near misses
+after being given user's input*/
+
 #pragma once
 #include <string>
 #include <unordered_map>

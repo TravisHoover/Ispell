@@ -30,7 +30,7 @@ int main()
 
 	while (myFile >> entry)		//while there are entries in list, read list
 	{
-		dictionary[entry] = counter;
+		dictionary[entry] = counter;		//create entry in unordered_map
 		counter++;
 	}
 
@@ -51,19 +51,23 @@ int main()
 		else
 		{
 			//If not, it should look for all possible near misses and print them if found
-			WordChecker WordChecker(userInput);
+			WordChecker WordChecker(userInput);		//create WordChecker class to handle near misses
 
 			Delete = WordChecker.hashDelete(userInput, dictionary);
+
 			Insert = WordChecker.hashInsert(userInput, dictionary);
+			
 			Swap = WordChecker.hashSwap(userInput, dictionary);
+			
 			Replace = WordChecker.hashReplace(userInput, dictionary);
+			
 			Space = WordChecker.hashSpace(userInput, dictionary);
 
 			//If no words are found after WordChecker, print "not found"
-			if (Delete || Insert || Swap || Replace || Space)
+			if (Delete || Insert || Swap || Replace || Space)	//if any are true, do nothing. Near misses were found
 				true;
 			else
-				cout << "not found" << endl;
+				cout << "not found" << endl;		//could not find word or any near misses
 
 		}
 	}
