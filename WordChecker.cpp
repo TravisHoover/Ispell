@@ -29,7 +29,7 @@ bool WordChecker::hashDelete(std::string entry, std::unordered_map<std::string, 
 
 		//search dictionary for entry
 		std::unordered_map<std::string, int>::const_iterator itr = dictionary.find(entry);
-		if (!(itr == dictionary.end()))
+		if (itr != dictionary.end())
 		{
 			v.push_back(entry);		//add entry to vector
 		}
@@ -66,7 +66,7 @@ bool WordChecker::hashInsert(std::string entry, std::unordered_map<std::string, 
 			entry.insert(i, 1, newChar);		//make new word with replaced letter
 			//check if new word is in the dictionary
 			std::unordered_map<std::string, int>::const_iterator itr = dictionary.find(entry);
-			if (!(itr == dictionary.end()))
+			if (itr != dictionary.end())
 			{
 				v.push_back(entry);
 			}
@@ -105,7 +105,7 @@ bool WordChecker::hashSwap(std::string entry, std::unordered_map<std::string, in
 			entry.at(j) = temp;				//perform the swap at j
 
 			std::unordered_map<std::string, int>::const_iterator itr = dictionary.find(entry);	//check if new word is in the dictionary
-			if (!(itr == dictionary.end()) && temp3 != entry)
+			if (itr != dictionary.end() && temp3 != entry)
 			{
 				v.push_back(entry);		//if it is in the dictionary, push back in vector
 			}
@@ -181,7 +181,7 @@ bool WordChecker::hashSpace(std::string entry, std::unordered_map<std::string, i
 
 		std::unordered_map<std::string, int>::const_iterator itr = dictionary.find(entry);	//check if new word is in the dictionary
 
-		if (!(itr == dictionary.end()))
+		if (itr != dictionary.end())
 		{
 			v.push_back(entry);
 		}
