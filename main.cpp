@@ -13,7 +13,7 @@ Date: 11/15/2016*/
 #include <string>
 #include <unordered_map>
 #include <map>
-#include <ctype>
+#include <algorithm>
 #include "WordChecker.h"
 
 using namespace std;
@@ -25,8 +25,6 @@ int main()
 	string entry = "";			//initialize entry to empty string
 	string userInput;			//string variable to handle user's input in interface
 	int counter = 0;				//counter for while loop to populate map
-	int i = 0;					//integer used in towlower while loop
-	char c = "";				//character used in tolower
 
 	fstream myFile;				//create file read variable
 	myFile.open("dict.txt");		//open file to read into unordered_map
@@ -45,12 +43,8 @@ int main()
 		cout << "Please input a word: ";
 		cin >> userInput;
 
-		while (userInput[i])
-		{
-			c=userInput[i];
-			putchar (tolower(c));
-			i++;
-		}
+		//force string to lower case
+		std::transform(userInput.begin(), userInput.end(), userInput.begin(), ::tolower);
 
 		//For each word, check whether the word is in the dictionary. 
 		if (dictionary[userInput])
